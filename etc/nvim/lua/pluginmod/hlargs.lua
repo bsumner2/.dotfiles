@@ -1,5 +1,0 @@
--- DEFAULT CONFIG DETAILS PROVIDED BY HLARGS GITHUB PAGE 
-
-require('hlargs').setup()
-
-
