@@ -51,3 +51,11 @@ nmap('<space>k', vcmd_lambda('BufferMoveNext'), {})
 nmap('<c-space>e', vcmd_lambda('BufferClose'), {})
 nmap('<c-space>E', vcmd_lambda('BufferCloseAllButCurrent'), {})
 
+vim.api.nvim_create_user_command('Tcolo',
+  function(opts)
+    require('umod.functions').transparent_colorscheme(opts.fargs[1])
+  end, {
+    nargs = 1,
+    complete = 'color',
+  }
+)

@@ -103,5 +103,13 @@ return require('packer').startup(function(use)
       require('barbar').setup()
     end,
   }
+
+
+  use {
+    'ellisonleao/gruvbox.nvim'
+  }
+
+
+
 end)
 
