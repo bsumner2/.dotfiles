@@ -1,13 +1,42 @@
 local lspconfig = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
---[[ lspconfig.tsserver.setup({
+
+
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '❌',
+      [vim.diagnostic.severity.WARN] = '‼️',
+      [vim.diagnostic.severity.HINT] = '⁉️',
+      [vim.diagnostic.severity.INFO] = 'ℹ️',
+    },
+  },
+})
+
+
+lspconfig.tsserver.setup({
   capabilities = capabilities
 })
 
 lspconfig.clangd.setup({
-  capabilities = capabilities
+  capabilities = capabilities,
+  cmd = {
+    'clangd',
+    '--query-driver=' .. (os.getenv('DEVKITARM')) .. '/bin/arm-none-eabi*,/opt/gbdk/bin/lcc' ,
+  },
 })
+
+lspconfig.cmake.setup({
+  capabilities = capabilities,
+})
+
+
+lspconfig.rust_analyzer.setup({
+  capabilities = capabilities,
+})
+
+
 
 lspconfig.lua_ls.setup({
   capabilities = capabilities,
@@ -39,7 +68,7 @@ lspconfig.lua_ls.setup({
     end
     return true
   end
-}) ]]--
+})
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -76,3 +105,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
+

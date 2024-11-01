@@ -6,6 +6,7 @@ local function new_file(fn)
   os.execute('touch '..fn)
 end
 
+
 local function new_dir(dn)
   if dn==nil then
     print('No dir name given.')
@@ -22,7 +23,7 @@ return {
 
   prompt_new_item = function(isdir)
     vim.ui.input({
-      prompt = isdir and 'Enter dir name: ' 
+      prompt = isdir and 'Enter dir name: '
                      or 'Enter File name: ',
       completion = 'file',
     },

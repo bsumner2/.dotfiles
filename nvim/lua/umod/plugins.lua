@@ -17,8 +17,9 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'neovim/nvim-lspconfig'
+    'neovim/nvim-lspconfig',
   }
+
   use {
     'hrsh7th/nvim-cmp',
     requires = {
@@ -79,17 +80,21 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'EdenEast/nightfox.nvim'
-  }
-
-  use {
-    'rcarriga/nvim-notify'
+    'EdenEast/nightfox.nvim',
   }
 
   use {
     'mrded/nvim-lsp-notify',
+    requires = {
+      'rcarriga/nvim-notify',
+    },
     config = function()
-      require('lsp-notify').setup({})
+      require('notify').setup({ background_colour='#282827' })
+      vim.notify = require('notify')
+      require('lsp-notify').setup({
+        notify = require('notify').notify,
+      })
+
     end,
   }
 
@@ -104,11 +109,33 @@ return require('packer').startup(function(use)
     end,
   }
 
-
   use {
-    'ellisonleao/gruvbox.nvim'
+    'm-demare/hlargs.nvim',
   }
 
+  use {
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  }
+
+  use {
+    'ayu-theme/ayu-vim',
+    config = function() require('extmod.ayucolor_cfg') end,
+  }
+
+  use {
+    'uloco/bluloco.nvim',
+    requires = {
+      'rktjmp/lush.nvim',
+    },
+  }
+
+  use {
+    "loctvl842/monokai-pro.nvim",
+    config = function()
+      require("monokai-pro").setup()
+    end
+  }
 
 
 end)
